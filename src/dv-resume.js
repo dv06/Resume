@@ -1,92 +1,63 @@
 import { LitElement, html, css } from 'lit';
 
-const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
+import './layout/dv-two-pane.js';
+import { penguin } from './svg/pengiun.js';
+import './personal/dv-picture-info.js';
+import './skills/dv-skill-list.js';
+import './skills/dv-skill-list-item-rank.js';
 
 export class DvResume extends LitElement {
-  static get properties() {
-    return {
-      title: { type: String },
-    };
-  }
+	static get properties() {
+		return {};
+	}
 
-  static get styles() {
-    return css`
-      :host {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        font-size: calc(10px + 2vmin);
-        color: #1a2b42;
-        max-width: 960px;
-        margin: 0 auto;
-        text-align: center;
-        background-color: var(--dv-resume-background-color);
-      }
+	static get styles() {
+		return css`
+			:host {
+				min-height: 100vh;
+				position: relative;
+				display: block;
+			}
+		`;
+	}
 
-      main {
-        flex-grow: 1;
-      }
-
-      .logo {
-        margin-top: 36px;
-        animation: app-logo-spin infinite 20s linear;
-      }
-
-      @keyframes app-logo-spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .app-footer {
-        font-size: calc(12px + 0.5vmin);
-        align-items: center;
-      }
-
-      .app-footer a {
-        margin-left: 5px;
-      }
-    `;
-  }
-
-  constructor() {
-    super();
-    this.title = 'My app';
-  }
-
-  render() {
-    return html`
-      <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
-        <h1>${this.title}</h1>
-
-        <p>Edit <code>src/DvResume.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
-      </main>
-
-      <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
-      </p>
-    `;
-  }
+	render() {
+		return html`
+			<dv-two-pane>
+				<div slot="side">
+					<dv-picture-info
+						name="Devanshi Mishra"
+						title="Software Developer"
+					>
+						${penguin}
+					</dv-picture-info>
+					<dv-skill-list skill="Langauges">
+						<dv-skill-list-item-rank
+							skill="C#"
+							rank="5"
+						></dv-skill-list-item-rank>
+						<dv-skill-list-item-rank
+							skill="Java"
+							rank="4"
+						></dv-skill-list-item-rank>
+						<dv-skill-list-item-rank
+							skill="Python"
+							rank="2"
+						></dv-skill-list-item-rank>
+						<dv-skill-list-item-rank
+							skill="Magic"
+							rank="5"
+						></dv-skill-list-item-rank>
+						<dv-skill-list-item-rank
+							skill="NodeJs"
+							rank="1"
+						></dv-skill-list-item-rank>
+					</dv-skill-list>
+				</div>
+				<div>Main</div>
+			</dv-two-pane>
+		`;
+	}
 }
 
 customElements.define('dv-resume', DvResume);
